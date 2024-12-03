@@ -1,0 +1,1 @@
+# qa-assignment-gambling-company
