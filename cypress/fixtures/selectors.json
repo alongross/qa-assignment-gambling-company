@@ -1,0 +1,23 @@
+{
+    "login": {
+      "loginButton": "[data-testid='lobby-login-btn']",
+      "emailInput": "[data-testid='email-input']",
+      "passwordInput": "[data-testid='password-input']",
+      "submitButton": "[data-testid='login-submit-btn']"
+    },
+    "profile": {
+      "menuButton": "[data-testid='menuButton']",
+      "myAccountButton": ".side-menu__action:contains('My Account')",
+      "profileButton": ".button__content:contains('MY PROFILE')",
+      "editPen": "svg._pen_a31cg_31",
+      "nicknameInput": "[data-testid='nicknameInput']",
+      "applyButton": ":contains('Apply')",
+      "profileNickname": "[data-testid='my-profile-nickname']"
+    },
+    "lobby": {
+      "profileDialog": "[data-testid='profileInfoDialog']",
+      "accountWrapper": ".account__wrapper",
+      "gameSwitcher": ".game-type-switcher-inner"
+    }
+  }
+  
