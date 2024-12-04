@@ -1,4 +1,4 @@
-name: Run Cypress Tests with Debugging
+name: Run Cypress Tests
 
 on:
   push:
@@ -21,39 +21,19 @@ jobs:
         with:
           node-version: 18
 
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
+      # Run Cypress tests using cypress-io/github-action
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          runTests: true
+          install: true
 
-      # Ensure Cypress binary is properly installed and permissions are set
-      - name: Install Cypress
-        run: |
-          npx cypress install
-          chmod +x $(npm bin)/cypress
-
-      # Verify Cypress installation
-      - name: Verify Cypress installation
-        run: $(npm bin)/cypress --version
-
-      # Run Cypress tests
-      - name: Run Cypress tests
-        run: $(npm bin)/cypress run --headed --record
-        env:
-          CYPRESS_baseUrl: https://dev.crowncoinscasino.com/
-        continue-on-error: true
-
-      # Capture screenshots and videos for debugging
-      - name: Upload Cypress screenshots and videos
+      # Upload artifacts for debugging
+      - name: Upload Cypress Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: cypress-artifacts
           path: |
             cypress/screenshots
             cypress/videos
-
-      # Save workflow artifacts
-      - name: Upload logs and reports
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-logs
-          path: cypress/logs
