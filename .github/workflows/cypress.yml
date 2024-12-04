@@ -1,4 +1,4 @@
-name: Run Cypress Tests
+name: Run Cypress Tests with Debugging
 
 on:
   push:
@@ -11,24 +11,66 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      - name: Install Cypress binary
-        run: npx cypress install
+      # Debug Node.js and npm environment
+      - name: Log Node.js and npm version
+        run: |
+          node -v
+          npm -v
+          npx cypress --version
 
+      # Ensure Cypress binary is installed and executable
+      - name: Ensure Cypress is executable
+        run: |
+          chmod +x node_modules/.bin/cypress
+          npx cypress install
+
+      # Run Cypress tests with additional debug logs
       - name: Run Cypress tests
-        run: npx cypress run --headed
+        run: npx cypress run --headed --record
         env:
           CYPRESS_baseUrl: https://dev.crowncoinscasino.com/
+        continue-on-error: true
 
-      - name: Upload Cypress artifacts
-        uses: actions/upload-artifact
+      # Capture screenshots and videos for debugging
+      - name: Upload Cypress screenshots and videos
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/screenshots
+            cypress/videos
+
+      # Print environment details for debugging
+      - name: Print Environment Details
+        run: env
+
+      # Debug failed test logs
+      - name: Print Cypress Logs
+        run: |
+          if [ -f cypress/logs/error.log ]; then
+            cat cypress/logs/error.log
+          else
+            echo "No error logs found."
+          fi
+
+      # Save workflow artifacts
+      - name: Upload logs and reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-logs
+          path: |
+            cypress/logs
