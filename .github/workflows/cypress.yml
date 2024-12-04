@@ -15,24 +15,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      # Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Install Cypress binary
-      - name: Install Cypress
-        run: npx cypress install
-
-      # Ensure Cypress binary is executable (fix potential permission issues)
-      - name: Ensure Cypress is executable
-        run: chmod +x node_modules/.bin/cypress
-
-      # Run Cypress tests
+      # Use the official Cypress GitHub Action
       - name: Run Cypress tests
-        run: npx cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          install: true       # Automatically installs dependencies
+          runTests: true      # Runs the tests
+          browser: chrome     # Optionally specify the browser (default: electron)
