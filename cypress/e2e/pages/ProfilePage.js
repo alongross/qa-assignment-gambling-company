@@ -3,7 +3,7 @@ export class ProfilePage {
     navigateToProfile() {
       cy.fixture('selectors').then((selectors) => {
         const { menuButton, myAccountButton,containsAccountButton } = selectors.profile;
-        cy.get(menuButton, { timeout: 100000 }).click({ force: true });
+        cy.get(menuButton, { timeout: 10000 }).click({ force: true });
         cy.get(myAccountButton)
         .contains(containsAccountButton)
         .click();

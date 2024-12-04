@@ -11,14 +11,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Use the official Cypress GitHub Action
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          install: true       # Automatically installs dependencies
-          runTests: true      # Runs the tests
-          browser: chrome     # Optionally specify the browser (default: electron)
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Cypress binary
+        run: npx cypress install
+
+      - name: Run Cypress tests
+        run: npx cypress run --headed
+        env:
+          CYPRESS_baseUrl: https://dev.crowncoinscasino.com/
+
+      - name: Upload Cypress artifacts
+        uses: actions/upload-artifact
