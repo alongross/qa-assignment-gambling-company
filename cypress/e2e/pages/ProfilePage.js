@@ -1,30 +1,42 @@
 
 export class ProfilePage {
     navigateToProfile() {
-        cy.get('[data-testid="menuButton"]', { timeout: 10000 }).click({ force: true });
-        cy.get('[class="side-menu__action"]')
-        .contains('My Account')
+      cy.fixture('selectors').then((selectors) => {
+        const { menuButton, myAccountButton,containsAccountButton } = selectors.profile;
+        cy.get(menuButton, { timeout: 10000 }).click({ force: true });
+        cy.get(myAccountButton)
+        .contains(containsAccountButton)
         .click();
-            }
+          });
+        }
   clickOnProfile()
   {
-    cy.get('[class="button__content"]')
-    .contains('MY PROFILE')
+    cy.fixture('selectors').then((selectors) => {
+      const { profileButton, containsmyProfile } = selectors.profile;
+    cy.get(profileButton)
+    .contains(containsmyProfile)
     .click();
+  });
   }
     editProfile(username, avatarIndex) {
         this.clickOnProfile()
-        cy.get('svg._pen_a31cg_31').eq(0).click(); // Click the first matched element
-        cy.get('[data-testid="nicknameInput"]')
+        cy.fixture('selectors').then((selectors) => {
+          const { editPen, nicknameInput,applyButton } = selectors.profile;
+        cy.get(editPen).eq(0).click(); // Click the first matched element
+        cy.get(nicknameInput)
         .clear().type(username);
         cy.get(`[data-testid="avatar-image-${avatarIndex}"]`).click();
-      cy.contains('Apply').click();
+      cy.contains(applyButton).click();
+    });
     }
   
     validateProfile(username) {
         this.navigateToProfile()
         this.clickOnProfile()
-      cy.get('[data-testid="my-profile-nickname"]').should('contain.text', username);
+        cy.fixture('selectors').then((selectors) => {
+          const { profileNickname } = selectors.profile;
+      cy.get(profileNickname).should('contain.text', username);
+    });
     }
   }
   

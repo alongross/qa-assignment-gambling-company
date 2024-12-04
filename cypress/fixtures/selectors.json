@@ -7,11 +7,13 @@
     },
     "profile": {
       "menuButton": "[data-testid='menuButton']",
-      "myAccountButton": ".side-menu__action:contains('My Account')",
-      "profileButton": ".button__content:contains('MY PROFILE')",
+      "myAccountButton":"[class='side-menu__action']",
+      "containsAccountButton":"My Account",
+      "profileButton": "[class='button__content']",
+      "containsmyProfile":"MY PROFILE",
       "editPen": "svg._pen_a31cg_31",
       "nicknameInput": "[data-testid='nicknameInput']",
-      "applyButton": ":contains('Apply')",
+      "applyButton": "Apply",
       "profileNickname": "[data-testid='my-profile-nickname']"
     },
     "lobby": {
