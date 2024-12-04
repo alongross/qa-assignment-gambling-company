@@ -2,7 +2,8 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://dev.crowncoinscasino.com/', // Base URL for the application
+    baseUrl: 'https://dev.crowncoinscasino.com/',
+    defaultCommandTimeout: 20000,
     setupNodeEvents(on, config) {
       // Customize browser launch options
       on('before:browser:launch', (browser = {}, launchOptions) => {

@@ -1,25 +1,24 @@
 {
-    "login": {
-      "loginButton": "[data-testid='lobby-login-btn']",
-      "emailInput": "[data-testid='email-input']",
-      "passwordInput": "[data-testid='password-input']",
-      "submitButton": "[data-testid='login-submit-btn']"
-    },
-    "profile": {
-      "menuButton": "[data-testid='menuButton']",
-      "myAccountButton":"[class='side-menu__action']",
-      "containsAccountButton":"My Account",
-      "profileButton": "[class='button__content']",
-      "containsmyProfile":"MY PROFILE",
-      "editPen": "svg._pen_a31cg_31",
-      "nicknameInput": "[data-testid='nicknameInput']",
-      "applyButton": "Apply",
-      "profileNickname": "[data-testid='my-profile-nickname']"
-    },
-    "lobby": {
-      "profileDialog": "[data-testid='profileInfoDialog']",
-      "accountWrapper": ".account__wrapper",
-      "gameSwitcher": ".game-type-switcher-inner"
-    }
+  "login": {
+    "loginButton": "[data-testid='lobby-login-btn']",
+    "emailInput": "[data-testid='email-input']",
+    "passwordInput": "[data-testid='password-input']",
+    "submitButton": "[data-testid='login-submit-btn']"
+  },
+  "profile": {
+    "menuButton": "[data-testid='menuButton']",
+    "myAccountButton": "[class='side-menu__action']",
+    "containsAccountButton": "My Account",
+    "profileButton": "[class='button__content']",
+    "containsmyProfile": "MY PROFILE",
+    "editPen": "svg._pen_a31cg_31",
+    "nicknameInput": "[data-testid='nicknameInput']",
+    "applyButton": "Apply",
+    "profileNickname": "[data-testid='my-profile-nickname']"
+  },
+  "lobby": {
+    "profileDialog": "[data-testid='profileInfoDialog']",
+    "accountWrapper": ".account__wrapper",
+    "gameSwitcher": ".game-type-switcher-inner"
   }
-  
+}
