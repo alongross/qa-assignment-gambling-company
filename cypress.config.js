@@ -4,6 +4,8 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'https://dev.crowncoinscasino.com/',
     defaultCommandTimeout: 20000,
+    video: true, // Ensure video recording is enabled
+    screenshotOnRunFailure: true, // Take screenshots on test failure
     setupNodeEvents(on, config) {
       // Customize browser launch options
       on('before:browser:launch', (browser = {}, launchOptions) => {
