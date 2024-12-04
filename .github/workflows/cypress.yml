@@ -25,22 +25,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Debug Node.js and npm environment
-      - name: Log Node.js and npm version
+      # Ensure Cypress binary is properly installed and permissions are set
+      - name: Install Cypress
         run: |
-          node -v
-          npm -v
-          npx cypress --version
-
-      # Ensure Cypress binary is installed and executable
-      - name: Ensure Cypress is executable
-        run: |
-          chmod +x node_modules/.bin/cypress
           npx cypress install
+          chmod +x $(npm bin)/cypress
 
-      # Run Cypress tests with additional debug logs
+      # Verify Cypress installation
+      - name: Verify Cypress installation
+        run: $(npm bin)/cypress --version
+
+      # Run Cypress tests
       - name: Run Cypress tests
-        run: npx cypress run --headed --record
+        run: $(npm bin)/cypress run --headed --record
         env:
           CYPRESS_baseUrl: https://dev.crowncoinscasino.com/
         continue-on-error: true
@@ -54,23 +51,9 @@ jobs:
             cypress/screenshots
             cypress/videos
 
-      # Print environment details for debugging
-      - name: Print Environment Details
-        run: env
-
-      # Debug failed test logs
-      - name: Print Cypress Logs
-        run: |
-          if [ -f cypress/logs/error.log ]; then
-            cat cypress/logs/error.log
-          else
-            echo "No error logs found."
-          fi
-
       # Save workflow artifacts
       - name: Upload logs and reports
         uses: actions/upload-artifact@v3
         with:
           name: cypress-logs
-          path: |
-            cypress/logs
+          path: cypress/logs
