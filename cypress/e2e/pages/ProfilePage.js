@@ -1,5 +1,10 @@
 export class ProfilePage {
   navigateToProfile() {
+    cy.get('body').then((body) => {
+      if (!body.find("[data-testid='menuButton']").length) {
+        cy.log('menuButton is missing from the DOM');
+      }
+    });
     cy.fixture('selectors').then(({ profile }) => {
       cy.get(profile.menuButton, { timeout: 20000 })
         .click({force: true});

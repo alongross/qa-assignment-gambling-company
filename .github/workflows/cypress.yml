@@ -22,8 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: List Cypress Artifacts
-        run: ls -R cypress || echo "No Cypress artifacts found"
+      - name: Set environment variable for dev
+        run: echo "CYPRESS_BASE_URL=https://dev.crowncoinscasino.com/" >> $GITHUB_ENV
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4
@@ -32,10 +32,10 @@ jobs:
           runTests: true
 
       - name: Upload Cypress Artifacts
-        if: success() || failure()
+        if: always() # Always run this step, even if tests fail
         uses: actions/upload-artifact@v3
         with:
           name: cypress-artifacts
           path: |
-            cypress/screenshots
             cypress/videos
+            cypress/screenshots

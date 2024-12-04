@@ -2,7 +2,7 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://dev.crowncoinscasino.com/',
+    baseUrl: process.env.CYPRESS_BASE_URL || 'https://dev.crowncoinscasino.com/', // Fallback to dev
     defaultCommandTimeout: 20000,
     video: true, // Ensure video recording is enabled
     screenshotOnRunFailure: true, // Take screenshots on test failure
