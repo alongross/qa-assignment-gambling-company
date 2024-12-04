@@ -1,4 +1,4 @@
-name: Run Cypress Tests
+name: Run Cypress Tests on Chrome
 
 on:
   push:
@@ -25,11 +25,12 @@ jobs:
       - name: Set environment variable for dev
         run: echo "CYPRESS_BASE_URL=https://dev.crowncoinscasino.com/" >> $GITHUB_ENV
 
-      - name: Run Cypress tests
+      - name: Run Cypress tests on Chrome
         uses: cypress-io/github-action@v4
         with:
           install: true
           runTests: true
+          browser: chrome
 
       - name: Upload Cypress Artifacts
         if: always() # Always run this step, even if tests fail
