@@ -11,19 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # Install dependencies
       - name: Install dependencies
         run: npm install
 
+      # Install Cypress binary
       - name: Install Cypress
         run: npx cypress install
 
+      # Ensure Cypress binary is executable (fix potential permission issues)
+      - name: Ensure Cypress is executable
+        run: chmod +x node_modules/.bin/cypress
+
+      # Run Cypress tests
       - name: Run Cypress tests
         run: npx cypress run
