@@ -29,12 +29,10 @@ export class LobbyPage {
         const greenCoin = ['coins_usc', 'coins_rsc', 'coins_bsc']
           .map((key) => properties[key] || 0)
           .reduce((sum, value) => sum + value, 0);
-  
-        cy.log('Yellow Coin:', yellowCoin);
-        cy.log('Green Coin:', greenCoin);
-  
         expect(yellowCoin).to.be.a('number');
         expect(greenCoin).to.be.a('number');
+        cy.log('Yellow Coin:', yellowCoin);
+        cy.log('Green Coin:', greenCoin);
       });
     }
   }
